@@ -30,6 +30,7 @@ mongoose.connect(MONGODB_URI, {
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
     console.error('👉 Ensure MONGODB_URI is correct in your environment variables and IP is whitelisted.');
+    process.exit(1); // Exit so Render restarts the service and tries again
   });
 
 // Routes
