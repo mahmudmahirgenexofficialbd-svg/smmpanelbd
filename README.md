@@ -179,11 +179,14 @@ All subsequent registrations will create regular user accounts.
 ## 📦 Deploy
 
 ### Backend (e.g. Railway / Render)
-1. Set environment variables in your hosting dashboard
+1. Set environment variables in your hosting dashboard: `PORT`, `MONGODB_URI`, `JWT_SECRET`.
 2. Set build command: `npm install`
 3. Set start command: `node server.js`
+4. Note your backend URL (e.g., `https://smm-api.onrender.com`).
 
 ### Frontend (e.g. Vercel / Netlify)
 1. Set build command: `npm run build`
 2. Set output directory: `dist`
-3. Update `vite.config.js` proxy to point to your deployed backend URL (or set `VITE_API_URL` env var and update `src/lib/api.js`)
+3. **IMPORTANT**: In your Netlify environment variables, add `VITE_API_URL` and set it to your **Backend URL** (including `/api`).
+   - Example: `VITE_API_URL=https://smm-api.onrender.com/api`
+4. Netlify will automatically use the `_redirects` file included in `frontend/public` to handle React routing.
