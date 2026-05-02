@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://smm-backend-27zx.onrender.com/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/:path*", "destination": "https://smm-backend-27zx.onrender.com/api/:path*" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
