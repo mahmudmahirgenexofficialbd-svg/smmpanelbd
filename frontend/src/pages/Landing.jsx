@@ -75,7 +75,7 @@ export default function Landing() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-gray-400 hover:text-white transition-colors text-sm">Services</a>
+            <Link to="/services" className="text-gray-400 hover:text-white transition-colors text-sm">Services</Link>
             <a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors text-sm">How it Works</a>
             <a href="#features" className="text-gray-400 hover:text-white transition-colors text-sm">Features</a>
             <Link to="/login" className="text-gray-400 hover:text-white transition-colors text-sm">Login</Link>
@@ -188,16 +188,16 @@ export default function Landing() {
           >
             {services.map((s) => (
               <motion.div key={s.name} variants={fadeUp}
-                className="glass p-6 hover:border-violet-500/50 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                className="bg-white p-6 rounded-2xl hover:border-violet-500/50 transition-all duration-300 hover:-translate-y-1 group cursor-pointer border border-gray-100 shadow-xl"
               >
                 <div className={`w-14 h-14 bg-gradient-to-br ${s.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   {s.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-3">{s.name}</h3>
+                <h3 className="text-xl font-bold mb-3 text-black">{s.name}</h3>
                 <ul className="space-y-2">
                   {s.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-gray-400 text-sm">
-                      <CheckCircle className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />{item}
+                    <li key={item} className="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                      <CheckCircle className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />{item}
                     </li>
                   ))}
                 </ul>

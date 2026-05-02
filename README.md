@@ -178,15 +178,19 @@ All subsequent registrations will create regular user accounts.
 
 ## 📦 Deploy
 
-### Backend (e.g. Railway / Render)
-1. Set environment variables in your hosting dashboard: `PORT`, `MONGODB_URI`, `JWT_SECRET`.
-2. Set build command: `npm install`
-3. Set start command: `node server.js`
-4. Note your backend URL (e.g., `https://smm-api.onrender.com`).
+### Backend (e.g. Render)
+1. Set environment variables in your Render dashboard:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string.
+   - `JWT_SECRET`: A long random string.
+2. Build Command: `npm install`
+3. Start Command: `node server.js`
+4. Note your backend URL (e.g., `https://smm-backend-27zx.onrender.com`).
 
-### Frontend (e.g. Vercel / Netlify)
-1. Set build command: `npm run build`
-2. Set output directory: `dist`
-3. **IMPORTANT**: In your Netlify environment variables, add `VITE_API_URL` and set it to your **Backend URL** (including `/api`).
-   - Example: `VITE_API_URL=https://smm-api.onrender.com/api`
-4. Netlify will automatically use the `_redirects` file included in `frontend/public` to handle React routing.
+### Frontend (e.g. Vercel)
+1. **Option A (Recommended)**: In Vercel Project Settings → Environment Variables, add:
+   - `VITE_API_URL`: Set to `https://your-backend-url.onrender.com/api`
+2. **Option B (Proxy)**: Use the `vercel.json` file provided in the root. Update the `destination` URL in `vercel.json` to match your actual Render backend URL.
+3. Build Command: `npm run build`
+4. Output Directory: `dist`
+5. Vercel will automatically handle routing and API proxying based on `vercel.json`.
+

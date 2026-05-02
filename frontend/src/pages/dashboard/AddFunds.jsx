@@ -68,7 +68,7 @@ export default function AddFunds() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!form.senderNumber || !form.trxId || !form.amount) return toast.error('Please fill all fields')
-    if (parseFloat(form.amount) < 10) return toast.error('Minimum amount is ৳10')
+    if (parseFloat(form.amount) < 10) return toast.error('Minimum amount is $10')
 
     setLoading(true)
     try {
@@ -211,7 +211,7 @@ export default function AddFunds() {
               </div>
 
               <div>
-                <label className="text-sm text-gray-400 mb-2 block font-medium">Amount (BDT)</label>
+                <label className="text-sm text-gray-400 mb-2 block font-medium">Amount (USD)</label>
                 <div className="relative">
                   <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                   <input
@@ -223,7 +223,7 @@ export default function AddFunds() {
                     className="input-field pl-11"
                   />
                 </div>
-                <p className="text-gray-600 text-xs mt-1.5">Minimum ৳10</p>
+                <p className="text-gray-600 text-xs mt-1.5">Minimum $10</p>
               </div>
 
               {/* Summary box */}
@@ -234,7 +234,7 @@ export default function AddFunds() {
                 >
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-400">Amount to add</span>
-                    <span className="text-2xl font-black gradient-text">৳{parseFloat(form.amount).toFixed(2)}</span>
+                    <span className="text-2xl font-black gradient-text">${parseFloat(form.amount).toFixed(2)}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
                     <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />

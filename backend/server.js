@@ -8,6 +8,7 @@ const userRoutes = require('./routes/users');
 const serviceRoutes = require('./routes/services');
 const orderRoutes = require('./routes/orders');
 const paymentRoutes = require('./routes/payments');
+const ticketRoutes = require('./routes/tickets');
 
 const app = express();
 
@@ -23,10 +24,10 @@ if (!process.env.MONGODB_URI) {
 }
 
 mongoose.connect(MONGODB_URI)
-  .then(() => console.log('✅ MongoDB connected successfully'))
+  .then(() => console.log('✅ MongoDB connected successfully to:', MONGODB_URI.split('@')[1] || 'local'))
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
-    console.error('👉 Add your MongoDB Atlas URI to backend/.env as: MONGODB_URI=mongodb+srv://...');
+    console.error('👉 Ensure MONGODB_URI is correct in your environment variables.');
   });
 
 // Routes
@@ -35,8 +36,17 @@ app.use('/api/users', userRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/tickets', ticketRoutes);
 
-// Basic route
+// Health check and basic route
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    timestamp: new Date()
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('SMM Panel API is running');
 });

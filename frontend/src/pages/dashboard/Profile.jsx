@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { User, Mail, Shield, Save } from 'lucide-react'
+import { User, Mail, Shield, Save, Zap } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 
@@ -39,14 +40,14 @@ export default function Profile() {
 
             <div className="mt-6 p-4 bg-white/5 rounded-xl">
               <div className="text-gray-400 text-xs mb-1">Account Balance</div>
-              <div className="text-2xl font-black gradient-text">৳{user?.balance?.toFixed(2) || '0.00'}</div>
+              <div className="text-2xl font-black gradient-text">${user?.balance?.toFixed(2) || '0.00'}</div>
             </div>
           </div>
         </motion.div>
 
         {/* Edit form */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="lg:col-span-2">
+          className="lg:col-span-2 space-y-6">
           <div className="glass p-6">
             <h3 className="font-bold mb-6 flex items-center gap-2">
               <User className="w-4 h-4 text-violet-400" /> Account Details
@@ -80,6 +81,19 @@ export default function Profile() {
                 <Save className="w-4 h-4" /> Save Changes
               </button>
             </form>
+          </div>
+
+          <div className="glass p-6">
+            <h3 className="font-bold mb-4 flex items-center gap-2">
+              <Zap className="w-4 h-4 text-violet-400" /> API Access
+            </h3>
+            <p className="text-gray-500 text-xs mb-4">Your secret API key for external integrations.</p>
+            <div className="bg-black/50 rounded-xl p-4 font-mono text-sm text-violet-300 break-all border border-white/5 mb-4">
+              {user?.apiKey || 'No API Key generated yet'}
+            </div>
+            <Link to="/dashboard/api" className="text-xs text-violet-400 hover:text-violet-300 font-bold flex items-center gap-1">
+              Manage API Key & Documentation →
+            </Link>
           </div>
         </motion.div>
       </div>

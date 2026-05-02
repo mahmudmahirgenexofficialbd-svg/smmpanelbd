@@ -102,7 +102,7 @@ export default function OrderHistory() {
                           </a>
                         </td>
                         <td className="py-3 px-4 hidden md:table-cell text-gray-300">{order.quantity?.toLocaleString()}</td>
-                        <td className="py-3 px-4 font-semibold text-white">৳{order.charge}</td>
+                        <td className="py-3 px-4 font-semibold text-white">${order.charge}</td>
                         <td className="py-3 px-4">
                           <span className={`${cfg.class} flex items-center gap-1.5 w-fit`}>
                             <Icon className={`w-3 h-3 ${order.status === 'processing' ? 'animate-spin' : ''}`} />

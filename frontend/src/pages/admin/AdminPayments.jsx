@@ -89,7 +89,7 @@ export default function AdminPayments() {
                 ['Method', selected.method?.toUpperCase()],
                 ['Sender Number', selected.senderNumber],
                 ['Transaction ID', selected.trxId],
-                ['Amount', `৳${selected.amount}`],
+                ['Amount', `$${selected.amount}`],
                 ['Status', selected.status],
                 ['Submitted', new Date(selected.createdAt).toLocaleString('en-BD')],
               ].map(([k, v]) => (
@@ -156,7 +156,7 @@ export default function AdminPayments() {
                       <td className={`py-3 px-4 capitalize font-bold ${p.method === 'bkash' ? 'text-pink-400' : 'text-orange-400'}`}>{p.method}</td>
                       <td className="py-3 px-4 text-gray-300 hidden sm:table-cell">{p.senderNumber}</td>
                       <td className="py-3 px-4 font-mono text-xs text-violet-300 hidden md:table-cell">{p.trxId}</td>
-                      <td className="py-3 px-4 font-bold text-emerald-400">৳{p.amount}</td>
+                      <td className="py-3 px-4 font-bold text-emerald-400">${p.amount}</td>
                       <td className="py-3 px-4"><span className={`badge-${p.status}`}>{p.status}</span></td>
                       <td className="py-3 px-4 text-gray-500 text-xs hidden lg:table-cell whitespace-nowrap">
                         {new Date(p.createdAt).toLocaleDateString('en-BD')}

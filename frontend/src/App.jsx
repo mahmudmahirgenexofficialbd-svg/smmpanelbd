@@ -13,6 +13,9 @@ import AddFunds from './pages/dashboard/AddFunds'
 import Transactions from './pages/dashboard/Transactions'
 import Profile from './pages/dashboard/Profile'
 import ApiPage from './pages/dashboard/ApiPage'
+import Support from './pages/dashboard/Support'
+import MassOrder from './pages/dashboard/MassOrder'
+import PublicServices from './pages/PublicServices'
 
 // Admin
 import AdminLayout from './layouts/AdminLayout'
@@ -21,6 +24,7 @@ import AdminPayments from './pages/admin/AdminPayments'
 import AdminOrders from './pages/admin/AdminOrders'
 import AdminUsers from './pages/admin/AdminUsers'
 import AdminServices from './pages/admin/AdminServices'
+import AdminTickets from './pages/admin/AdminTickets'
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth()
@@ -45,6 +49,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/services" element={<PublicServices />} />
       <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
       <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
 
@@ -56,6 +61,8 @@ export default function App() {
         <Route path="add-funds" element={<AddFunds />} />
         <Route path="transactions" element={<Transactions />} />
         <Route path="api" element={<ApiPage />} />
+        <Route path="support" element={<Support />} />
+        <Route path="mass-order" element={<MassOrder />} />
         <Route path="profile" element={<Profile />} />
       </Route>
 
@@ -66,6 +73,7 @@ export default function App() {
         <Route path="orders" element={<AdminOrders />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="services" element={<AdminServices />} />
+        <Route path="tickets" element={<AdminTickets />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

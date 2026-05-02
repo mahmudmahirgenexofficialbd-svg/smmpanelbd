@@ -101,7 +101,7 @@ export default function NewOrder() {
                         <optgroup key={platform} label={platform.charAt(0).toUpperCase() + platform.slice(1)}>
                           {svcs.map(svc => (
                             <option key={svc._id} value={svc._id}>
-                              {svc.name} — ৳{svc.pricePer1k}/1K
+                              {svc.name} — ${svc.pricePer1k}/1K
                             </option>
                           ))}
                         </optgroup>
@@ -157,7 +157,7 @@ export default function NewOrder() {
               >
                 {loading
                   ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  : <><ShoppingCart className="w-4 h-4" /><span>Place Order — ৳{totalCharge}</span></>
+                  : <><ShoppingCart className="w-4 h-4" /><span>Place Order — ${totalCharge}</span></>
                 }
               </button>
             </form>
@@ -166,38 +166,38 @@ export default function NewOrder() {
 
         {/* Order Summary */}
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
-          <div className="glass p-6 sticky top-4">
-            <h3 className="font-bold mb-5 flex items-center gap-2">
-              <DollarSign className="w-4 h-4 text-violet-400" /> Order Summary
+          <div className="bg-white rounded-3xl p-6 sticky top-4 border border-gray-100 shadow-2xl">
+            <h3 className="font-bold mb-5 flex items-center gap-2 text-black">
+              <DollarSign className="w-4 h-4 text-violet-600" /> Order Summary
             </h3>
 
             {selected ? (
               <div className="space-y-4">
                 <div className={`w-full h-1.5 bg-gradient-to-r ${platformColors[selected.platform] || 'from-violet-500 to-purple-500'} rounded-full mb-4`} />
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Service</span>
-                  <span className="font-medium text-right max-w-[140px] truncate">{selected.name}</span>
+                  <span className="text-gray-500 font-medium">Service</span>
+                  <span className="font-bold text-black text-right max-w-[140px] truncate">{selected.name}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Platform</span>
-                  <span className="capitalize font-medium">{selected.platform}</span>
+                  <span className="text-gray-500 font-medium">Platform</span>
+                  <span className="capitalize font-bold text-black">{selected.platform}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Rate</span>
-                  <span className="font-medium">৳{selected.pricePer1k} / 1000</span>
+                  <span className="text-gray-500 font-medium">Rate</span>
+                  <span className="font-bold text-black">${selected.pricePer1k} / 1000</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Quantity</span>
-                  <span className="font-medium">{parseInt(form.quantity || 0).toLocaleString()}</span>
+                  <span className="text-gray-500 font-medium">Quantity</span>
+                  <span className="font-bold text-black">{parseInt(form.quantity || 0).toLocaleString()}</span>
                 </div>
-                <div className="border-t border-white/10 pt-4 flex justify-between">
-                  <span className="font-semibold">Total</span>
-                  <span className="text-xl font-black gradient-text">৳{totalCharge}</span>
+                <div className="border-t border-gray-100 pt-4 flex justify-between">
+                  <span className="font-bold text-gray-500">Total</span>
+                  <span className="text-xl font-black text-violet-600">${totalCharge}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-400">Your Balance</span>
                   <span className={`font-medium ${parseFloat(totalCharge) > (user?.balance || 0) ? 'text-red-400' : 'text-emerald-400'}`}>
-                    ৳{user?.balance?.toFixed(2) || '0.00'}
+                    ${user?.balance?.toFixed(2) || '0.00'}
                   </span>
                 </div>
                 {parseFloat(totalCharge) > (user?.balance || 0) && (

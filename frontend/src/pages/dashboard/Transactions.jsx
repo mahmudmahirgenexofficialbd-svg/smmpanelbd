@@ -85,7 +85,7 @@ export default function Transactions() {
                         </td>
                         <td className="py-3 px-4 hidden sm:table-cell font-mono text-xs text-gray-300">{p.trxId}</td>
                         <td className="py-3 px-4 hidden md:table-cell text-gray-300">{p.senderNumber}</td>
-                        <td className="py-3 px-4 font-bold text-emerald-400">৳{p.amount}</td>
+                        <td className="py-3 px-4 font-bold text-emerald-400">${p.amount}</td>
                         <td className="py-3 px-4">
                           <span className={`${cfg.class} flex items-center gap-1.5 w-fit`}>
                             <Icon className="w-3 h-3" />{cfg.label}

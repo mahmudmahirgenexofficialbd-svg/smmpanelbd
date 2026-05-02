@@ -28,7 +28,7 @@ export default function Register() {
       toast.success('Account created successfully!')
       navigate('/dashboard')
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed')
+      toast.error(err.message || 'Registration failed')
     } finally {
       setLoading(false)
     }

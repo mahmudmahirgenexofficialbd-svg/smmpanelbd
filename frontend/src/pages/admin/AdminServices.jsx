@@ -121,7 +121,7 @@ export default function AdminServices() {
               </div>
 
               <div>
-                <label className="text-sm text-gray-400 mb-1.5 block">Price per 1000 (৳)</label>
+                <label className="text-sm text-gray-400 mb-1.5 block">Price per 1000 ($)</label>
                 <input type="number" step="0.01" placeholder="e.g. 10.00" value={form.pricePer1k}
                   onChange={(e) => setForm({ ...form, pricePer1k: e.target.value })} className="input-field" />
               </div>
@@ -172,7 +172,7 @@ export default function AdminServices() {
       )}
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <div className="glass overflow-hidden">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
@@ -189,23 +189,23 @@ export default function AdminServices() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-white/10">
+                  <tr className="border-b border-gray-100 bg-gray-50/50">
                     {['Name', 'Platform', 'Price/1K', 'Min', 'Max', 'Status', ''].map(h => (
-                      <th key={h} className="text-left py-3 px-4 text-gray-500 font-medium">{h}</th>
+                      <th key={h} className="text-left py-3 px-4 text-gray-500 font-bold uppercase tracking-wider text-xs">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {services.map(s => (
-                    <tr key={s._id} className="border-b border-white/5 hover:bg-white/3 transition-colors">
+                    <tr key={s._id} className="border-b border-gray-50 hover:bg-gray-50/80 transition-colors">
                       <td className="py-3 px-4">
-                        <div className="font-medium max-w-[160px] truncate">{s.name}</div>
-                        {s.category && <div className="text-gray-500 text-xs">{s.category}</div>}
+                        <div className="font-bold text-black max-w-[160px] truncate">{s.name}</div>
+                        {s.category && <div className="text-gray-500 text-xs font-medium">{s.category}</div>}
                       </td>
-                      <td className={`py-3 px-4 capitalize font-medium ${platformColor[s.platform] || 'text-gray-300'}`}>
+                      <td className={`py-3 px-4 capitalize font-bold ${platformColor[s.platform] || 'text-gray-600'}`}>
                         {s.platform}
                       </td>
-                      <td className="py-3 px-4 font-bold text-white">৳{s.pricePer1k}</td>
+                      <td className="py-3 px-4 font-black text-violet-600">${s.pricePer1k}</td>
                       <td className="py-3 px-4 text-gray-400">{s.minQuantity?.toLocaleString()}</td>
                       <td className="py-3 px-4 text-gray-400">{s.maxQuantity?.toLocaleString()}</td>
                       <td className="py-3 px-4">

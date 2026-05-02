@@ -4,11 +4,26 @@ import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 
 export default function ApiPage() {
-  const { user } = useAuth()
-  const apiKey = `smm_${user?.id || 'login_required'}_key`
+  const { user, setUser } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const apiKey = user?.apiKey || 'No API Key generated yet'
   const baseUrl = window.location.origin.replace(':5173', ':5000')
 
   const copy = (text) => { navigator.clipboard.writeText(text); toast.success('Copied!') }
+
+  const regenerate = async () => {
+    if (!window.confirm('Regenerating will invalidate your old key. Continue?')) return
+    setLoading(true)
+    try {
+      const { data } = await api.post('/users/api-key')
+      setUser({ ...user, apiKey: data.apiKey })
+      toast.success('API Key regenerated!')
+    } catch {
+      toast.error('Failed to regenerate key')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const endpoints = [
     { method: 'GET',  path: '/api/services',   desc: 'Get all available services' },
@@ -31,12 +46,19 @@ export default function ApiPage() {
           <div className="glass p-6">
             <h3 className="font-bold mb-1 flex items-center gap-2"><Zap className="w-4 h-4 text-violet-400" />Your API Key</h3>
             <p className="text-gray-500 text-xs mb-4">Use this key in the Authorization header as Bearer token from your login.</p>
-            <div className="bg-black/50 rounded-xl p-4 font-mono text-sm text-violet-300 break-all flex items-start justify-between gap-3">
+            <div className="bg-black/50 rounded-xl p-4 font-mono text-sm text-violet-300 break-all flex items-start justify-between gap-3 mb-4">
               <span>{apiKey}</span>
               <button onClick={() => copy(apiKey)} className="text-gray-500 hover:text-white flex-shrink-0">
                 <Copy className="w-4 h-4" />
               </button>
             </div>
+            <button
+              onClick={regenerate}
+              disabled={loading}
+              className="text-[10px] text-gray-500 hover:text-violet-400 transition-colors flex items-center gap-1"
+            >
+              <Zap className="w-3 h-3" /> {loading ? 'Regenerating...' : 'Regenerate API Key'}
+            </button>
           </div>
         </motion.div>
 

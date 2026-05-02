@@ -23,7 +23,7 @@ export default function Login() {
       toast.success(`Welcome back, ${data.user.username}!`)
       navigate(data.user.role === 'admin' ? '/admin' : '/dashboard')
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed')
+      toast.error(err.message || 'Login failed')
     } finally {
       setLoading(false)
     }

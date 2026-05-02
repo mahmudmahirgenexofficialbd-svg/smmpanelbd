@@ -22,4 +22,19 @@ const adminMiddleware = (req, res, next) => {
   res.status(403).json({ message: 'Admin access required' });
 };
 
-module.exports = { authMiddleware, adminMiddleware };
+const apiAuthMiddleware = async (req, res, next) => {
+  const apiKey = req.query.key || req.headers['x-api-key'] || (req.headers.authorization?.startsWith('Bearer smm_') ? req.headers.authorization.split(' ')[1] : null);
+  
+  if (!apiKey) return next(); // Fallback to JWT if no API key provided
+
+  try {
+    const user = await User.findOne({ apiKey }).select('-password');
+    if (!user) return res.status(401).json({ message: 'Invalid API Key' });
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { authMiddleware, adminMiddleware, apiAuthMiddleware };

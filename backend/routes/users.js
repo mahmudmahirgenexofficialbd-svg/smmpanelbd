@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/User');
 const Order = require('../models/Order');
 const Payment = require('../models/Payment');
+const Ticket = require('../models/Ticket');
 const { authMiddleware, adminMiddleware } = require('../middleware/auth');
 const router = express.Router();
 
@@ -38,7 +39,21 @@ router.get('/admin/stats', authMiddleware, adminMiddleware, async (req, res) => 
       { $group: { _id: null, total: { $sum: '$amount' } } }
     ]);
     const totalRevenue = revenueAgg[0]?.total || 0;
-    res.json({ totalUsers, totalOrders, pendingPayments, totalRevenue });
+    const openTickets = await Ticket.countDocuments({ status: 'open' });
+    res.json({ totalUsers, totalOrders, pendingPayments, totalRevenue, openTickets });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+const crypto = require('crypto');
+
+// User: Regenerate API Key
+router.post('/api-key', authMiddleware, async (req, res) => {
+  try {
+    const key = `smm_${crypto.randomBytes(16).toString('hex')}`;
+    const user = await User.findByIdAndUpdate(req.user._id, { apiKey: key }, { new: true }).select('-password');
+    res.json({ apiKey: user.apiKey });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }

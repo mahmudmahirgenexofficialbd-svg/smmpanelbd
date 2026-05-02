@@ -96,7 +96,7 @@ export default function AdminOrders() {
                         </a>
                       </td>
                       <td className="py-3 px-4 text-gray-300">{o.quantity?.toLocaleString()}</td>
-                      <td className="py-3 px-4 font-semibold text-white">৳{o.charge}</td>
+                      <td className="py-3 px-4 font-semibold text-white">${o.charge}</td>
                       <td className="py-3 px-4">
                         {updating === o._id ? (
                           <div className="w-4 h-4 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />

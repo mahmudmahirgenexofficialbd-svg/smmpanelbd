@@ -87,7 +87,7 @@ export default function AdminUsers() {
                       <td className="py-3 px-4">
                         {editing?.id === u._id ? (
                           <div className="flex items-center gap-2">
-                            <span className="text-gray-400 text-xs">৳</span>
+                            <span className="text-gray-400 text-xs">$</span>
                             <input
                               type="number"
                               value={editing.balance}
@@ -97,7 +97,7 @@ export default function AdminUsers() {
                             />
                           </div>
                         ) : (
-                          <span className="font-semibold text-emerald-400">৳{u.balance?.toFixed(2)}</span>
+                          <span className="font-semibold text-emerald-400">${u.balance?.toFixed(2)}</span>
                         )}
                       </td>
                       <td className="py-3 px-4 text-gray-500 text-xs whitespace-nowrap">

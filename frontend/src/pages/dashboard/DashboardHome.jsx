@@ -23,7 +23,7 @@ export default function DashboardHome() {
   }, [])
 
   const stats = [
-    { label: 'Account Balance', value: `৳${user?.balance?.toFixed(2) || '0.00'}`, icon: Wallet, color: 'from-violet-500 to-purple-600', link: '/dashboard/add-funds' },
+    { label: 'Account Balance', value: `$${user?.balance?.toFixed(2) || '0.00'}`, icon: Wallet, color: 'from-violet-500 to-purple-600', link: '/dashboard/add-funds' },
     { label: 'Total Orders', value: orders.length > 0 ? '—' : '0', icon: ClipboardList, color: 'from-cyan-500 to-blue-600', link: '/dashboard/orders' },
     { label: 'New Order', value: 'Place Now', icon: PlusCircle, color: 'from-emerald-500 to-teal-600', link: '/dashboard/new-order' },
     { label: 'Growth', value: 'Analytics', icon: TrendingUp, color: 'from-orange-500 to-rose-500', link: '#' },
@@ -60,7 +60,7 @@ export default function DashboardHome() {
       >
         <div>
           <div className="text-gray-400 text-sm mb-1">Available Balance</div>
-          <div className="text-4xl font-black gradient-text">৳{user?.balance?.toFixed(2) || '0.00'}</div>
+          <div className="text-4xl font-black gradient-text">${user?.balance?.toFixed(2) || '0.00'}</div>
         </div>
         <div className="flex gap-3">
           <Link to="/dashboard/add-funds" className="btn-primary py-2.5 px-5 text-sm flex items-center gap-2">
@@ -111,7 +111,7 @@ export default function DashboardHome() {
                         <div className="text-gray-500 text-xs capitalize">{order.serviceId?.platform}</div>
                       </td>
                       <td className="py-3 px-4 hidden sm:table-cell text-gray-300">{order.quantity?.toLocaleString()}</td>
-                      <td className="py-3 px-4 hidden md:table-cell text-gray-300">৳{order.charge}</td>
+                      <td className="py-3 px-4 hidden md:table-cell text-gray-300">${order.charge}</td>
                       <td className="py-3 px-4">
                         <span className={`badge-${order.status} flex items-center gap-1.5 w-fit`}>
                           {statusIcon[order.status]}{order.status}

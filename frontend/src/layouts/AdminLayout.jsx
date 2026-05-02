@@ -3,7 +3,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, CreditCard, ClipboardList,
-  Users, Settings, LogOut, Zap, Menu, X, Shield
+  Users, Settings, LogOut, Zap, Menu, X, Shield, MessageSquare
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
@@ -14,6 +14,7 @@ const navItems = [
   { to: '/admin/orders', label: 'Orders', icon: ClipboardList },
   { to: '/admin/users', label: 'Users', icon: Users },
   { to: '/admin/services', label: 'Services', icon: Settings },
+  { to: '/admin/tickets', label: 'Tickets', icon: MessageSquare },
 ]
 
 export default function AdminLayout() {

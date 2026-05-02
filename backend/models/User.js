@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  apiKey: {
+    type: String,
+    unique: true,
+    sparse: true, // Allow multiple nulls if not yet generated
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

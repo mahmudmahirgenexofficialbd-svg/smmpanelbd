@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Users, ClipboardList, CreditCard, DollarSign, TrendingUp, Clock } from 'lucide-react'
+import { Users, ClipboardList, CreditCard, DollarSign, TrendingUp, Clock, MessageSquare } from 'lucide-react'
 import api from '../../lib/api'
 
 const cardVariants = {
@@ -30,7 +30,8 @@ export default function AdminDashboard() {
     { label: 'Total Users', value: stats?.totalUsers ?? '—', icon: Users, color: 'from-violet-500 to-purple-600' },
     { label: 'Total Orders', value: stats?.totalOrders ?? '—', icon: ClipboardList, color: 'from-cyan-500 to-blue-600' },
     { label: 'Pending Payments', value: stats?.pendingPayments ?? '—', icon: Clock, color: 'from-yellow-500 to-orange-500' },
-    { label: 'Total Revenue', value: stats ? `৳${stats.totalRevenue.toFixed(2)}` : '—', icon: DollarSign, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Open Tickets', value: stats?.openTickets ?? '—', icon: MessageSquare, color: 'from-pink-500 to-rose-500' },
+    { label: 'Total Revenue', value: stats ? `$${stats.totalRevenue.toFixed(2)}` : '—', icon: DollarSign, color: 'from-emerald-500 to-teal-600' },
   ]
 
   if (loading) return (
@@ -83,7 +84,7 @@ export default function AdminDashboard() {
                     <tr key={p._id} className="border-b border-white/5 hover:bg-white/3 transition-colors">
                       <td className="py-2.5 px-4 text-gray-300 truncate max-w-[80px]">{p.userId?.username || 'N/A'}</td>
                       <td className="py-2.5 px-4 capitalize font-medium text-pink-400">{p.method}</td>
-                      <td className="py-2.5 px-4 text-emerald-400 font-semibold">৳{p.amount}</td>
+                      <td className="py-2.5 px-4 text-emerald-400 font-semibold">${p.amount}</td>
                       <td className="py-2.5 px-4"><span className={`badge-${p.status}`}>{p.status}</span></td>
                     </tr>
                   ))}
@@ -114,7 +115,7 @@ export default function AdminDashboard() {
                     <tr key={o._id} className="border-b border-white/5 hover:bg-white/3 transition-colors">
                       <td className="py-2.5 px-4 text-gray-300 truncate max-w-[80px]">{o.userId?.username || 'N/A'}</td>
                       <td className="py-2.5 px-4 text-gray-300 truncate max-w-[100px]">{o.serviceId?.name || 'N/A'}</td>
-                      <td className="py-2.5 px-4 text-white font-semibold">৳{o.charge}</td>
+                      <td className="py-2.5 px-4 text-white font-semibold">${o.charge}</td>
                       <td className="py-2.5 px-4"><span className={`badge-${o.status}`}>{o.status}</span></td>
                     </tr>
                   ))}
