@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { useAuth } from './context/AuthContext'
 
 // Pages
@@ -47,36 +48,39 @@ const GuestRoute = ({ children }) => {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/services" element={<PublicServices />} />
-      <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
-      <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
+    <>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/services" element={<PublicServices />} />
+        <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+        <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
 
-      {/* User Dashboard */}
-      <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-        <Route index element={<DashboardHome />} />
-        <Route path="new-order" element={<NewOrder />} />
-        <Route path="orders" element={<OrderHistory />} />
-        <Route path="add-funds" element={<AddFunds />} />
-        <Route path="transactions" element={<Transactions />} />
-        <Route path="api" element={<ApiPage />} />
-        <Route path="support" element={<Support />} />
-        <Route path="mass-order" element={<MassOrder />} />
-        <Route path="profile" element={<Profile />} />
-      </Route>
+        {/* User Dashboard */}
+        <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+          <Route index element={<DashboardHome />} />
+          <Route path="new-order" element={<NewOrder />} />
+          <Route path="orders" element={<OrderHistory />} />
+          <Route path="add-funds" element={<AddFunds />} />
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="api" element={<ApiPage />} />
+          <Route path="support" element={<Support />} />
+          <Route path="mass-order" element={<MassOrder />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
 
-      {/* Admin Panel */}
-      <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="payments" element={<AdminPayments />} />
-        <Route path="orders" element={<AdminOrders />} />
-        <Route path="users" element={<AdminUsers />} />
-        <Route path="services" element={<AdminServices />} />
-        <Route path="tickets" element={<AdminTickets />} />
-      </Route>
+        {/* Admin Panel */}
+        <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="payments" element={<AdminPayments />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="services" element={<AdminServices />} />
+          <Route path="tickets" element={<AdminTickets />} />
+        </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Analytics />
+    </>
   )
 }
