@@ -12,7 +12,7 @@ router.get('/', authMiddleware, adminMiddleware, async (req, res) => {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
     res.json(users);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -24,7 +24,7 @@ router.patch('/:id/balance', authMiddleware, adminMiddleware, async (req, res) =
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -42,7 +42,7 @@ router.get('/admin/stats', authMiddleware, adminMiddleware, async (req, res) => 
     const openTickets = await Ticket.countDocuments({ status: 'open' });
     res.json({ totalUsers, totalOrders, pendingPayments, totalRevenue, openTickets });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -55,7 +55,7 @@ router.post('/api-key', authMiddleware, async (req, res) => {
     const user = await User.findByIdAndUpdate(req.user._id, { apiKey: key }, { new: true }).select('-password');
     res.json({ apiKey: user.apiKey });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 

@@ -22,6 +22,8 @@ api.interceptors.response.use(
     // Add custom message for network errors
     if (!err.response) {
       err.message = 'Network error: Cannot reach the server. Please check your internet or API configuration.'
+    } else if (err.response.data?.error) {
+      err.message = err.response.data.error
     } else if (err.response.data?.message) {
       err.message = err.response.data.message
     }

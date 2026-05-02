@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const services = await Service.find({ isActive: true }).sort({ platform: 1, name: 1 });
     res.json(services);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -19,7 +19,7 @@ router.get('/all', authMiddleware, adminMiddleware, async (req, res) => {
     const services = await Service.find().sort({ createdAt: -1 });
     res.json(services);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -40,7 +40,7 @@ router.put('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     if (!service) return res.status(404).json({ message: 'Service not found' });
     res.json(service);
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
@@ -50,7 +50,7 @@ router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     await Service.findByIdAndDelete(req.params.id);
     res.json({ message: 'Service deleted' });
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
